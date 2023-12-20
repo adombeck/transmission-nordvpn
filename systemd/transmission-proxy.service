@@ -1,0 +1,12 @@
+[Unit]
+Requires=transmission-proxy.socket
+After=transmission-proxy.socket
+BindsTo=transmission-nordvpn.service
+JoinsNamespaceOf=transmission-nordvpn.service
+
+[Service]
+Type=notify
+User=transmission-nordvpn
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd --exit-idle-time=5min 127.0.0.1:19091
+PrivateTmp=yes
+PrivateNetwork=yes

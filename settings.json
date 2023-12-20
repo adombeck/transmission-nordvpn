@@ -1,0 +1,10 @@
+{
+  "download-dir": "/var/lib/transmission-daemon/complete",
+  "incomplete-dir": "/var/lib/transmission-daemon/incomplete",
+  "port-forwarding-enabled": false,
+  "rpc-authentication-required": true,
+  "rpc-bind-address": "127.0.0.1",
+  "rpc-port": 19091,
+  "rpc-password": "{{RPC_PASSWORD}}",
+  "rpc-username": "user"
+}

@@ -1,0 +1,49 @@
+[Unit]
+Description=Transmission BitTorrent Daemon in NordVPN network namespace
+After=nordvpn-netns.service
+BindsTo=nordvpn-netns.service
+
+[Service]
+User=transmission-nordvpn
+Type=notify
+Environment=TRANSMISSION_HOME=/etc/transmission-nordvpn
+ExecStart=/usr/bin/transmission-daemon -f --log-error
+ExecStop=/bin/kill -s STOP $MAINPID
+ExecReload=/bin/kill -s HUP $MAINPID
+NetworkNamespacePath=/run/netns/nordvpn
+BindReadOnlyPaths=/etc/netns/nordvpn/resolv.conf:/etc/resolv.conf:norbind
+PrivateMounts=no
+
+UMask=0077
+ProtectProc=invisible
+CapabilityBoundingSet=
+NoNewPrivileges=yes
+SecureBits=keep-caps-locked no-setuid-fixup no-setuid-fixup-locked noroot noroot-locked
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/etc/transmission-nordvpn
+PrivateTmp=yes
+PrivateDevices=yes
+PrivateIPC=yes
+PrivateUsers=yes
+ProtectHostname=yes
+ProtectClock=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK
+RestrictNamespaces=yes
+LockPersonality=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+RemoveIPC=yes
+PrivateMounts=yes
+# BindPaths=/media/data_external2/transmission-downloads:/var/lib/plexmediaserver/transmission-downloads
+SystemCallFilter=@system-service
+SystemCallArchitectures=native
+# Transmission calls quotactl, so we need to allow it
+SystemCallFilter=quotactl
+
+[Install]
+WantedBy=multi-user.target
