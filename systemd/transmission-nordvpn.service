@@ -2,6 +2,8 @@
 Description=Transmission BitTorrent Daemon in NordVPN network namespace
 After=nordvpn-netns.service
 BindsTo=nordvpn-netns.service
+Before=transmission-proxy.service
+Requires=transmission-proxy.service
 
 [Service]
 User=transmission-nordvpn
