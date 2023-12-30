@@ -22,6 +22,7 @@ SecureBits=keep-caps-locked no-setuid-fixup no-setuid-fixup-locked noroot noroot
 ProtectSystem=strict
 ProtectHome=yes
 ReadWritePaths=/etc/transmission-nordvpn
+ReadWritePaths=/var/lib/transmission-nordvpn
 PrivateTmp=yes
 PrivateDevices=yes
 PrivateIPC=yes
