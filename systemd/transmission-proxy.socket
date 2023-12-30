@@ -1,2 +1,5 @@
 [Socket]
+# Use port 19091 instead of the default (9091) to avoid accidentally
+# connecting to a different transmission-daemon instance (which does not
+# use a VPN).
 ListenStream=19091
